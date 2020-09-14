@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sorties{% endblock %}
+
+{% block body %}
+    <h1>Sorties</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ sorty.id }}</td>
+            </tr>
+            <tr>
+                <th>No_sortie</th>
+                <td>{{ sorty.noSortie }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ sorty.nom }}</td>
+            </tr>
+            <tr>
+                <th>Datedebut</th>
+                <td>{{ sorty.datedebut ? sorty.datedebut|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Duree</th>
+                <td>{{ sorty.duree }}</td>
+            </tr>
+            <tr>
+                <th>Datecloture</th>
+                <td>{{ sorty.datecloture ? sorty.datecloture|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Nbinscriptionsmax</th>
+                <td>{{ sorty.nbinscriptionsmax }}</td>
+            </tr>
+            <tr>
+                <th>Descriptioninfos</th>
+                <td>{{ sorty.descriptioninfos }}</td>
+            </tr>
+            <tr>
+                <th>Etatsortie</th>
+                <td>{{ sorty.etatsortie }}</td>
+            </tr>
+            <tr>
+                <th>UrlPhoto</th>
+                <td>{{ sorty.urlPhoto }}</td>
+            </tr>
+            <tr>
+                <th>Organisateur</th>
+                <td>{{ sorty.organisateur }}</td>
+            </tr>
+            <tr>
+                <th>Lieux_no_lieu</th>
+                <td>{{ sorty.lieuxNoLieu }}</td>
+            </tr>
+            <tr>
+                <th>Etats_no_etat</th>
+                <td>{{ sorty.etatsNoEtat }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('sorties_index') }}">back to list</a>
+
+    <a href="{{ path('sorties_edit', {'id': sorty.id}) }}">edit</a>
+
+    {{ include('sorties/_delete_form.html.twig') }}
+{% endblock %}
