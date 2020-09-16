@@ -1,57 +1,105 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Sorties index{% endblock %}
+{% block title %}Sorties{% endblock %}
 
 {% block body %}
-    <h1>Sorties index</h1>
+    <div class="container">
+        <div class="right-block">
+            <div>
+                <p>Date de jour : {{ "now"|date("d/m/Y") }}</p>
+                <p>Participant : {# todo: {{ participant.prenom}} {{ participant.nom}} #}XXXXXXXX</p>
+            </div>
+        </div>
+    <h2>Filtrer les sorties</h2>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>No_sortie</th>
-                <th>Nom</th>
-                <th>Datedebut</th>
-                <th>Duree</th>
-                <th>Datecloture</th>
-                <th>Nbinscriptionsmax</th>
-                <th>Descriptioninfos</th>
-                <th>Etatsortie</th>
-                <th>UrlPhoto</th>
-                <th>Organisateur</th>
-                <th>Lieux_no_lieu</th>
-                <th>Etats_no_etat</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for sorty in sorties %}
-            <tr>
-                <td>{{ sorty.id }}</td>
-                <td>{{ sorty.noSortie }}</td>
-                <td>{{ sorty.nom }}</td>
-                <td>{{ sorty.datedebut ? sorty.datedebut|date('Y-m-d') : '' }}</td>
-                <td>{{ sorty.duree }}</td>
-                <td>{{ sorty.datecloture ? sorty.datecloture|date('Y-m-d') : '' }}</td>
-                <td>{{ sorty.nbinscriptionsmax }}</td>
-                <td>{{ sorty.descriptioninfos }}</td>
-                <td>{{ sorty.etatsortie }}</td>
-                <td>{{ sorty.urlPhoto }}</td>
-                <td>{{ sorty.organisateur }}</td>
-                <td>{{ sorty.lieuxNoLieu }}</td>
-                <td>{{ sorty.etatsNoEtat }}</td>
-                <td>
-                    <a href="{{ path('sorties_show', {'id': sorty.id}) }}">show</a>
-                    <a href="{{ path('sorties_edit', {'id': sorty.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="14">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        {# todo: gerer le formulaire / tous les filtres #}
+        <form action="index.html.twig" method="get" class="filters row">
+            <div class="col-md-5">
+                <select class="custom-select select-campus">
+                    <option selected>Sélectionnez un campus</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
 
-    <a href="{{ path('sorties_new') }}">Create new</a>
+                <input class="form-control form-control-md mr-3 w-75" type="text" placeholder="Le nom de la sortie" aria-label="Search">
+
+                <div class="datepicker">
+                    <p>
+                        <span>
+                            <label for="date-debut">Entre</label>
+                            <input type="date" class="form-control" id="date-debut" placeholder="date" aria-label="date" aria-describedby="basic-addon1">
+                        </span>
+                        <span>
+                            <label for="date-fin">et</label>
+                            <input type="date" class="form-control" id="date-fin" placeholder="date" aria-label="date" aria-describedby="basic-addon1">
+                        </span>
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="col-md-5 sorties-checkboxes">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="organisateurSortie">
+                    <label class="form-check-label" for="exampleCheck1">Sorties dont je suis l'organisateur/trice</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="inscritSortie">
+                    <label class="form-check-label" for="exampleCheck1">Sorties auxquelles je suis inscrit/e</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="pasInscritSortie">
+                    <label class="form-check-label" for="exampleCheck1">Sorties auxquelles je ne suis pas inscrit/e</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="sortiesPassees">
+                    <label class="form-check-label" for="exampleCheck1">Sorties passées</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+            <button type="submit" class="btn btn-primary rechercher-sortie">Rechercher</button>
+            </div>
+
+        </form>
+        <table class="table table-sorties">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Nom de la sortie</th>
+                    <th scope="col">Date de la sortie</th>
+                    <th scope="col">Duree</th>
+                    <th scope="col">Clôture</th>
+                    <th scope="col">Inscrits/places</th>
+                    <th scope="col">Etat</th>
+                    <th scope="col">Inscrit</th>
+                    <th scope="col">Organisateur</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for sorty in sorties %}
+                <tr>
+                    <td>{{ sorty.nom }}</td>
+                    <td>{{ sorty.datedebut ? sorty.datedebut|date('Y-m-d') : '' }}</td>
+                    <td>{{ sorty.duree }}</td>
+                    <td>{{ sorty.datecloture ? sorty.datecloture|date('Y-m-d') : '' }}</td>
+                    <td>0/{{ sorty.nbinscriptionsmax }}</td>
+                    <td>{{ sorty.etatsortie }}</td>
+                    <td>{{ sorty.lieuxNoLieu }}</td>
+                    <td>{{ sorty.organisateur }}</td>
+                    <td>
+                        {# todo: créer un conditionnel pour limiter les actions: si l'organisateur de la sortie est l'utilisateur connecté, il peut modifier ou annuler ses sorties #}
+                        <a href="{{ path('sorties_show', {'id': sorty.id}) }}">show</a>
+                        <a href="{{ path('sorties_edit', {'id': sorty.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="14">Aucune sortie</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <button type="button" class="btn btn-primary creer-sortie"><a href="{{ path('sorties_new') }}">Créer une sortie</a></button>
+    </div>
 {% endblock %}
