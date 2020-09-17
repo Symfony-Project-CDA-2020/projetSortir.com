@@ -17,7 +17,9 @@
             <div class="col-md-5">
                 <select class="custom-select select-campus">
                     <option selected>Sélectionnez un campus</option>
-                    <option value="1">One</option>
+                    {% for cam in campus %}
+                    <option value={{ cam.getNoCampus }}>{{ cam.getNomCampus }}</option>
+                    {% endfor %}
                     <option value="2">Two</option>
                     <option value="3">Three</option>
                 </select>

@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Campus;
 use App\Entity\Sorties;
 use App\Form\SortiesType;
+use App\Repository\CampusRepository;
 use App\Repository\SortiesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,10 +20,12 @@ class SortiesController extends AbstractController
     /**
      * @Route("/", name="sorties_index", methods={"GET"})
      */
-    public function index(SortiesRepository $sortiesRepository): Response
+    public function index(SortiesRepository $sortiesRepository, CampusRepository $campusRepository): Response
     {
+
         return $this->render('sorties/index.html.twig', [
             'sorties' => $sortiesRepository->findAll(),
+            'campus' => $campusRepository->findAll(),
         ]);
     }
 

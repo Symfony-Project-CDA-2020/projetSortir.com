@@ -19,6 +19,17 @@ class SortiesRepository extends ServiceEntityRepository
         parent::__construct($registry, Sorties::class);
     }
 
+    public function findByCampus(){
+        $qb = $this->createQueryBuilder('c');
+        $qb->join('s.seasons', 'seas')
+            ->addSelect('seas');
+        $qb -> setMaxResults(30);
+        $query = $qb->getQuery();
+
+        return $query->getResult();
+
+    }
+
     // /**
     //  * @return Sorties[] Returns an array of Sorties objects
     //  */
