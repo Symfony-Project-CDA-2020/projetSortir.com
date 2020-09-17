@@ -35,7 +35,9 @@ class SortiesType extends AbstractType
             ])
             ->add('descriptioninfos', TextareaType::class, [
                 'label' => 'Description et infos'
-            ]);
+            ])
+        /* todo: ajouter les reste des attributs: Campus, Ville, Lieu, Rue, Code postal, Latitude, Longitude  */
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
