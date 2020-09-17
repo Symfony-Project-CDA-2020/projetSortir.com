@@ -77,6 +77,12 @@ class Sorties
      */
     private $etats_no_etat;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="sorties")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $campus;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -222,6 +228,18 @@ class Sorties
     public function setEtatsNoEtat(int $etats_no_etat): self
     {
         $this->etats_no_etat = $etats_no_etat;
+
+        return $this;
+    }
+
+    public function getCampus(): ?Campus
+    {
+        return $this->campus;
+    }
+
+    public function setCampus(?Campus $campus): self
+    {
+        $this->campus = $campus;
 
         return $this;
     }
