@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=LieuxRepository::class)
  */
-class Lieux
+class Location
 {
     /**
      * @ORM\Id
@@ -20,17 +20,17 @@ class Lieux
     /**
      * @ORM\Column (type="integer")
      */
-    private $no_lieu;
+    private $num_location;
 
     /**
      * @ORM\Column (type="string", length=30)
      */
-    private $nom_lieu;
+    private $name_location;
 
     /**
      * @ORM\Column (type="string", length=30, nullable=true)
      */
-    private $rue;
+    private $address;
 
     /**
      * @ORM\Column (type="decimal", precision=10, scale=8, nullable=true)
@@ -43,11 +43,6 @@ class Lieux
     private $longitude;
 
     /**
-     * @ORM\Column (type="integer")
-     */
-    private $villes_no_ville;
-
-    /**
      * @return mixed
      */
     public function getId()
@@ -56,51 +51,59 @@ class Lieux
     }
 
     /**
-     * @return mixed
+     * @param mixed $id
      */
-    public function getNoLieu()
+    public function setId($id): void
     {
-        return $this->no_lieu;
-    }
-
-    /**
-     * @param mixed $no_lieu
-     */
-    public function setNoLieu($no_lieu): void
-    {
-        $this->no_lieu = $no_lieu;
+        $this->id = $id;
     }
 
     /**
      * @return mixed
      */
-    public function getNomLieu()
+    public function getNumLocation()
     {
-        return $this->nom_lieu;
+        return $this->no_location;
     }
 
     /**
-     * @param mixed $nom_lieu
+     * @param mixed $no_location
      */
-    public function setNomLieu($nom_lieu): void
+    public function setNumLocation($no_location): void
     {
-        $this->nom_lieu = $nom_lieu;
+        $this->no_location = $no_location;
     }
 
     /**
      * @return mixed
      */
-    public function getRue()
+    public function getNameLocation()
     {
-        return $this->rue;
+        return $this->name_location;
     }
 
     /**
-     * @param mixed $rue
+     * @param mixed $name_location
      */
-    public function setRue($rue): void
+    public function setNameLocation($name_location): void
     {
-        $this->rue = $rue;
+        $this->name_location = $name_location;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param mixed $address
+     */
+    public function setAddress($address): void
+    {
+        $this->address = $address;
     }
 
     /**
@@ -138,19 +141,21 @@ class Lieux
     /**
      * @return mixed
      */
-    public function getVillesNoVille()
+    public function getCityNumCity()
     {
-        return $this->villes_no_ville;
+        return $this->city_num_city;
     }
 
     /**
-     * @param mixed $villes_no_ville
+     * @param mixed $city_num_city
      */
-    public function setVillesNoVille($villes_no_ville): void
+    public function setCityNumCity($city_num_city): void
     {
-        $this->villes_no_ville = $villes_no_ville;
+        $this->city_num_city = $city_num_city;
     }
 
-
-
+    /**
+     * @ORM\Column (type="integer")
+     */
+    private $city_num_city;
 }

@@ -20,23 +20,50 @@ class Campus
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $no_campus;
-
-    /**
      * @ORM\Column(type="string", length=30)
      */
-    private $nom_campus;
+    private $name_campus;
 
     /**
-     * @ORM\OneToMany(targetEntity=Sorties::class, mappedBy="campus")
+     * @ORM\OneToMany(targetEntity=Event::class, mappedBy="campus")
      */
-    private $sorties;
+    private $events;
 
     public function __construct()
     {
-        $this->sorties = new ArrayCollection();
+        $this->events = new ArrayCollection();
+    }
+
+
+    /**
+     * @return Collection|Event[]
+     */
+    public function getEvents(): Collection
+    {
+        return $this->events;
+    }
+
+    public function addEvent(Event $event): self
+    {
+        if (!$this->events->contains($event)) {
+            $this->events[] = $event;
+            $event->setCampus($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvent(Event $event): self
+    {
+        if ($this->events->contains($event)) {
+            $this->events->removeElement($event);
+            // set the owning side to null (unless already changed)
+            if ($event->getCampus() === $this) {
+                $event->setCampus(null);
+            }
+        }
+
+        return $this;
     }
 
     /**
@@ -48,66 +75,27 @@ class Campus
     }
 
     /**
-     * @return mixed
+     * @param mixed $id
      */
-    public function getNoCampus()
+    public function setId($id): void
     {
-        return $this->no_campus;
-    }
-
-    /**
-     * @param mixed $no_campus
-     */
-    public function setNoCampus($no_campus): void
-    {
-        $this->no_campus = $no_campus;
+        $this->id = $id;
     }
 
     /**
      * @return mixed
      */
-    public function getNomCampus()
+    public function getNameCampus()
     {
-        return $this->nom_campus;
+        return $this->name_campus;
     }
 
     /**
-     * @param mixed $nom_campus
+     * @param mixed $name_campus
      */
-    public function setNomCampus($nom_campus): void
+    public function setNameCampus($name_campus): void
     {
-        $this->nom_campus = $nom_campus;
-    }
-
-    /**
-     * @return Collection|Sorties[]
-     */
-    public function getSorties(): Collection
-    {
-        return $this->sorties;
-    }
-
-    public function addSorty(Sorties $sorty): self
-    {
-        if (!$this->sorties->contains($sorty)) {
-            $this->sorties[] = $sorty;
-            $sorty->setCampus($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSorty(Sorties $sorty): self
-    {
-        if ($this->sorties->contains($sorty)) {
-            $this->sorties->removeElement($sorty);
-            // set the owning side to null (unless already changed)
-            if ($sorty->getCampus() === $this) {
-                $sorty->setCampus(null);
-            }
-        }
-
-        return $this;
+        $this->name_campus = $name_campus;
     }
 
 }

@@ -2,36 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Sorties;
+use App\Entity\Event;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Sorties|null find($id, $lockMode = null, $lockVersion = null)
- * @method Sorties|null findOneBy(array $criteria, array $orderBy = null)
- * @method Sorties[]    findAll()
- * @method Sorties[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Event|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Event|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Event[]    findAll()
+ * @method Event[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class SortiesRepository extends ServiceEntityRepository
+class EventRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Sorties::class);
-    }
-
-    public function findByCampus(){
-        $qb = $this->createQueryBuilder('c');
-        $qb->join('s.seasons', 'seas')
-            ->addSelect('seas');
-        $qb -> setMaxResults(30);
-        $query = $qb->getQuery();
-
-        return $query->getResult();
-
+        parent::__construct($registry, Event::class);
     }
 
     // /**
-    //  * @return Sorties[] Returns an array of Sorties objects
+    //  * @return Event[] Returns an array of Event objects
     //  */
     /*
     public function findByExampleField($value)
@@ -48,7 +37,7 @@ class SortiesRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Sorties
+    public function findOneBySomeField($value): ?Event
     {
         return $this->createQueryBuilder('s')
             ->andWhere('s.exampleField = :val')
