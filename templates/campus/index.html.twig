@@ -3,67 +3,7 @@
 {% block title %}Gérer les campus{% endblock %}
 
 {% block body %}
-
-    <h2>Filtrer les sites</h2>
-
-        <form action="index.html.twig" method="get" class="filters row">
-            <div class="col-md-5">
-                <select class="custom-select select-campus">
-                    <option selected>Sélectionnez un campus</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
-
-                <input class="form-control form-control-md mr-3 w-75" type="text" placeholder="Le nom de la sortie" aria-label="Search">
-
-                <div class="datepicker">
-                    <p>
-                        <span>
-                            <label for="date-debut">Entre</label>
-                            <input type="date" class="form-control" id="date-debut" placeholder="date" aria-label="date" aria-describedby="basic-addon1">
-                        </span>
-                        <span>
-                            <label for="date-fin">et</label>
-                            <input type="date" class="form-control" id="date-fin" placeholder="date" aria-label="date" aria-describedby="basic-addon1">
-                        </span>
-                    </p>
-                </div>
-
-            </div>
-
-            <div class="col-md-2">
-            <button type="submit" class="btn btn-primary rechercher-sortie">Rechercher</button>
-            </div>
-
-        </form>
-        <table class="table table-sorties">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Campus</th>
-                    <th scope="col">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for sorty in sorties %}
-                <tr>
-                    <td>{{ sorty.nom }}</td>
-                    <td>{{ sorty.etatsortie }}</td>
-                    <td>{{ sorty.lieuxNoLieu }}</td>
-                    <td>{{ sorty.organisateur }}</td>
-                    <td>
-                        {# todo: créer un conditionnel pour limiter les actions: si l'organisateur de la sortie est l'utilisateur connecté, il peut modifier ou annuler ses sorties #}
-                        <a href="{{ path('sorties_show', {'id': sorty.id}) }}">show</a>
-                        <a href="{{ path('sorties_edit', {'id': sorty.id}) }}">edit</a>
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="14">Aucune sortie</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-        <button type="button" class="btn btn-primary creer-sortie"><a href="{{ path('sorties_new') }}">Ajouter</a></button>
+    <div class="container">
+        <h2>Gérer les campus</h2>
     </div>
 {% endblock %}
