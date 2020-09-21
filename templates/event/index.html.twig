@@ -86,6 +86,7 @@
                     <td>{{ event.startDate ? event.startDate|date('Y-m-d') : '' }}</td>
                     <td>{{ event.duration }}</td>
                     <td>{{ event.endDate ? event.endDate|date('Y-m-d') : '' }}</td>
+                    {#TODO ici il y a du brutforce#}
                     <td>0/{{ event.maxRegistrations }}</td>
                     <td>{{ event.eventState }}</td>
                     <td>{{ event.locationNumLocation }}</td>

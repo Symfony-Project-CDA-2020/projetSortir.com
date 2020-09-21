@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Event;
+use App\Entity\Participant;
 use App\Form\EventType;
 use App\Repository\CampusRepository;
 use App\Repository\EventRepository;
