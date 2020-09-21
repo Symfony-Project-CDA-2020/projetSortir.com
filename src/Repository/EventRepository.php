@@ -19,6 +19,20 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
+    public function findByCampus($campus){
+       $qb = $this->createQueryBuilder('e');
+        $qb ->where('e.campus = :campus')
+            ->setParameter('campus', $campus);
+        $query = $qb->getQuery();
+        return $query->getResult();
+
+    }
+
+
+
+
+
+
     // /**
     //  * @return Event[] Returns an array of Event objects
     //  */
