@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\ParticipantRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
 
 /**
  * @ORM\Entity(repositoryClass=ParticipantRepository::class)
@@ -137,7 +139,6 @@ class Participant implements UserInterface, \Serializable
     public function setPassword(string $password): self
     {
         $this->password = $password;
-
         return $this;
     }
 
@@ -178,6 +179,11 @@ class Participant implements UserInterface, \Serializable
     }
     public function getRoles()
     {
+        if ($this->getAdmin()!=0){
+            return[
+                'ROLE_ADMIN'
+            ];
+        }
         return[
                 'ROLE_USER'
             ];
