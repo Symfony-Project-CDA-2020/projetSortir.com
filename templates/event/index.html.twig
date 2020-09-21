@@ -13,9 +13,9 @@
     <h2>Filtrer les sorties</h2>
 
         {# todo: gerer le formulaire / tous les filtres #}
-        <form action="index.html.twig" method="get" class="filters row">
+        <form action="" method="get" class="filters row">
             <div class="col-md-5">
-                <select class="custom-select select-campus">
+                <select class="custom-select select-campus" name="campus">
                     <option selected>Sélectionnez un campus</option>
                     {% for cam in campus %}
                     <option value={{ cam.id }}>{{ cam.nameCampus }}</option>

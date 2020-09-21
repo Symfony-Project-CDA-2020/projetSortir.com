@@ -281,7 +281,7 @@ class Event
     }
 
     /**
-     * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="event")
+     * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="events")
      * @ORM\JoinColumn(nullable=false)
      */
     private $campus;
