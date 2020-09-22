@@ -9,7 +9,7 @@
                 <p>Date de jour : {{ "now"|date("d/m/Y") }}</p>
                {# TODO pour l'instant j'ai mis cette condition pour pouvoir continuer de travailler, mais il faudra le gérer autrement#}
                 {% if is_granted('ROLE_USER') %}
-                <p>Participant : {{ app.user.lastname }} {{ app.user.firstname }}  </p>
+                <p>Participant : {{ app.user.lastname|upper }} {{ app.user.firstname }}  </p>
                 {% endif %}
             </div>
         </div>
