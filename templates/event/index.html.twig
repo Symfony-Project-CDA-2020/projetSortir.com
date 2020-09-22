@@ -7,7 +7,10 @@
         <div class="right-block">
             <div>
                 <p>Date de jour : {{ "now"|date("d/m/Y") }}</p>
-                <p>Participant : {# todo: {{ participant.prenom}} {{ participant.nom}} #}XXXXXXXX</p>
+               {# TODO pour l'instant j'ai mis cette condition pour pouvoir continuer de travailler, mais il faudra le gérer autrement#}
+                {% if is_granted('ROLE_USER') %}
+                <p>Participant : {{ app.user.lastname }} {{ app.user.firstname }}  </p>
+                {% endif %}
             </div>
         </div>
     <h2>Filtrer les sorties</h2>
@@ -19,8 +22,6 @@
         {% else %}
             {% include('event/event_table.html.twig') %}
         {% endif %}
-
-
         <button type="button" class="btn btn-primary creer-sortie"><a href="{{ path('event_new') }}">Créer une sortie</a></button>
     </div>
 {% endblock %}
