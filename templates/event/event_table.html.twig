@@ -21,8 +21,10 @@
             <td>{{ event.duration }}</td>
             <td>{{ event.endDate ? event.endDate|date('Y-m-d') : '' }}</td>
             <td>0/{{ event.maxRegistrations }}</td>
+            {# todo: Gestion de etat de la sortie: en cours, fermée, ouverte #}
             <td>{{ event.eventState }}</td>
-            <td>{{ event.locationNumLocation }}</td>
+            {# todo: Gestion des inscriptions, afficher "X" dans le tableau si inscrit #}
+            <td>X</td>
             <td>{{ event.organizer }}</td>
             <td>
                 {# todo: créer un conditionnel pour limiter les actions: si l'organisateur de la sortie est l'utilisateur connecté, il peut modifier ou annuler ses event #}

@@ -65,11 +65,6 @@ class Event
     /**
      * @ORM\Column(type="integer")
      */
-    private $location_num_location;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
     private $state_num_state;
 
     /**
@@ -285,6 +280,24 @@ class Event
      * @ORM\JoinColumn(nullable=false)
      */
     private $campus;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=City::class, inversedBy="events")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $city;
+
+    public function getCity(): ?City
+    {
+        return $this->city;
+    }
+
+    public function setCity(?City $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
 
 
 }

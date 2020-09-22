@@ -9,7 +9,7 @@
                 <p>Date de jour : {{ "now"|date("d/m/Y") }}</p>
                {# TODO pour l'instant j'ai mis cette condition pour pouvoir continuer de travailler, mais il faudra le gérer autrement#}
                 {% if is_granted('ROLE_USER') %}
-                <p>Participant : {{ app.user.lastname }} {{ app.user.firstname }}  </p>
+                <p>Participant : {{ app.user.lastname|upper }} {{ app.user.firstname }}  </p>
                 {% endif %}
             </div>
         </div>
@@ -17,11 +17,8 @@
 
         {% include ('event/_filter_form.html.twig') %}
 
-        {% if eventsByCampus %}
-            {% include('event/event_filter_table.html.twig') %}
-        {% else %}
-            {% include('event/event_table.html.twig') %}
-        {% endif %}
+        {% include('event/event_table.html.twig') %}
+
         <button type="button" class="btn btn-primary creer-sortie"><a href="{{ path('event_new') }}">Créer une sortie</a></button>
     </div>
 {% endblock %}
