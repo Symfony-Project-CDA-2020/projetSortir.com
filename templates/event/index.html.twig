@@ -14,8 +14,16 @@
 
         {% include ('event/_filter_form.html.twig') %}
 
-        {% include('event/events_table.html.twig') %}
+        {% if eventsByCampus %}
+            {% include('event/event_filter_table.html.twig') %}
+        {% else %}
+            {% include('event/event_table.html.twig') %}
+        {% endif %}
+
 
         <button type="button" class="btn btn-primary creer-sortie"><a href="{{ path('event_new') }}">Créer une sortie</a></button>
     </div>
 {% endblock %}
+
+
+
