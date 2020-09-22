@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Gérer les campus{% endblock %}
+{% block title %}Gérer les villes{% endblock %}
 
 {% block body %}
 
@@ -8,11 +8,11 @@
 
     <div class="center">
         <div>
-            <h2>Gérer les campus</h2>
+            <h2>Gérer les villes</h2>
         </div>
     </div>
 
-    <h2>Filtrer les sites</h2>
+    <h2>Filtrer les villes</h2>
     <p>Le nom contient</p>
             <form class="search-container" action="/action_page.php" style="margin:auto;max-width:300px">
                 <input type="text" placeholder="Rechercher" name="search">
@@ -22,14 +22,16 @@
     <table class="table table-sorties">
         <thead class="thead-dark">
         <tr>
-            <th scope="col">Campus</th>
+            <th scope="col">Ville</th>
+            <th scope="col">Code postal</th>
             <th scope="col">Actions</th>
         </tr>
         </thead>
 
         <tbody>
             <tr>
-                <td>Saint-Herblain</td>
+                <td>Nantes</td>
+                <td>12345</td>
                 <td>
                     <a href="#">Modifier</a>
                     <a href="#">Supprimer</a>
