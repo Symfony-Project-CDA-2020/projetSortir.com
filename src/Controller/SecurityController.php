@@ -13,6 +13,7 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/", name="login")
+     * @IsGranted("IS_AUTHENTICATED_ANONYMOUSLY")
      */
     public function login(Request $request, AuthenticationUtils $utils)
     {
