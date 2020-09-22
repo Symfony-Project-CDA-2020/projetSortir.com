@@ -2,8 +2,12 @@
 
 namespace App\Form;
 
+use App\Entity\Campus;
+use App\Entity\City;
 use App\Entity\Event;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -11,7 +15,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class EventType extends AbstractType
 {
@@ -36,8 +39,17 @@ class EventType extends AbstractType
             ->add('description', TextareaType::class, [
                 'label' => 'Description et infos'
             ])
+            ->add('campus', EntityType::class, [
+                'class' => Campus::class,
+                'choice_label' => 'name_campus',
+            ])
+            ->add('city', EntityType::class, [
+            'class' => City::class,
+            'choice_label' => 'name_city',
+    ]);
 
-        /* todo: ajouter les reste des attributs: Campus, Ville, Lieu, Rue, Code postal, Latitude, Longitude  */
+
+        /* todo: ajouter les reste des attributs: Ville, Lieu, Rue, Code postal, Latitude, Longitude  */
         ;
     }
 

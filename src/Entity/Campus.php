@@ -34,6 +34,11 @@ class Campus
         $this->events = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->getNameCampus();
+    }
+
 
     /**
      * @return Collection|Event[]

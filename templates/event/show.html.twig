@@ -8,53 +8,45 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ event.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
+                <th>Nom de la sortie</th>
                 <td>{{ event.name }}</td>
             </tr>
             <tr>
-                <th>Datedebut</th>
+                <th>Date et heure de la sortie</th>
                 <td>{{ event.startDate ? event.startDate|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
-                <th>Duree</th>
-                <td>{{ event.duration }}</td>
-            </tr>
-            <tr>
-                <th>Datecloture</th>
+                <th>Date limite d'inscription</th>
                 <td>{{ event.endDate ? event.endDate|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
-                <th>Nbinscriptionsmax</th>
+                <th>Nombre de places</th>
                 <td>{{ event.maxRegistrations }}</td>
             </tr>
             <tr>
-                <th>Descriptioninfos</th>
+                <th>Durée</th>
+                <td>{{ event.duration }}</td>
+            </tr>
+
+            <tr>
+                <th>Description et infos</th>
                 <td>{{ event.description }}</td>
             </tr>
             <tr>
-                <th>Etatsortie</th>
-                <td>{{ event.eventState }}</td>
+                <th>Campus</th>
+                <td>{{ event.campus.getNameCampus() }}</td>
             </tr>
             <tr>
-                <th>UrlPhoto</th>
-                <td>{{ event.urlPhoto }}</td>
+                <th>Ville</th>
+                <td>{{ event.city.nameCity }}</td>
             </tr>
+
+            {# TODO: afficher le lieu: "location" #}
             <tr>
-                <th>Organisateur</th>
-                <td>{{ event.organizer }}</td>
+                <th>Lieu</th>
+                <td>xxx</td>
             </tr>
-            <tr>
-                <th>Lieux_no_lieu</th>
-                <td>{{ event.locationNumLocation }}</td>
-            </tr>
-            <tr>
-                <th>Etats_no_etat</th>
-                <td>{{ event.stateNumState }}</td>
-            </tr>
+
         </tbody>
     </table>
 
