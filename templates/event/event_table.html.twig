@@ -1,0 +1,40 @@
+<table class="table table-sorties table-responsive">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">Nom de la sortie</th>
+        <th scope="col">Date de la sortie</th>
+        <th scope="col">Duree</th>
+        <th scope="col">Clôture</th>
+        <th scope="col">Inscrits/places</th>
+        <th scope="col">Etat</th>
+        <th scope="col">Inscrit</th>
+        <th scope="col">Organisateur</th>
+        <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% if events %}
+        {% for event in events %}
+        <tr>
+            <td>{{ event.name }}</td>
+            <td>{{ event.startDate ? event.startDate|date('Y-m-d') : '' }}</td>
+            <td>{{ event.duration }}</td>
+            <td>{{ event.endDate ? event.endDate|date('Y-m-d') : '' }}</td>
+            <td>0/{{ event.maxRegistrations }}</td>
+            <td>{{ event.eventState }}</td>
+            <td>{{ event.locationNumLocation }}</td>
+            <td>{{ event.organizer }}</td>
+            <td>
+                {# todo: créer un conditionnel pour limiter les actions: si l'organisateur de la sortie est l'utilisateur connecté, il peut modifier ou annuler ses event #}
+                <a href="{{ path('event_show', {'id': event.id}) }}">show</a>
+                <a href="{{ path('event_edit', {'id': event.id}) }}">edit</a>
+            </td>
+        </tr>
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td colspan="14">Aucune sortie</td>
+        </tr>
+    {% endif %}
+    </tbody>
+</table>
