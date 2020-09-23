@@ -287,6 +287,12 @@ class Event
      */
     private $city;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Location::class, inversedBy="events")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $location;
+
     public function getCity(): ?City
     {
         return $this->city;
@@ -295,6 +301,18 @@ class Event
     public function setCity(?City $city): self
     {
         $this->city = $city;
+
+        return $this;
+    }
+
+    public function getLocation(): ?Location
+    {
+        return $this->location;
+    }
+
+    public function setLocation(?Location $location): self
+    {
+        $this->location = $location;
 
         return $this;
     }
