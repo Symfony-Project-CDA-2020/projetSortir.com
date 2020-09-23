@@ -57,10 +57,6 @@ class Event
      */
     private $urlPhoto;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $organizer;
 
     /**
      * @ORM\Column(type="integer")
@@ -216,21 +212,6 @@ class Event
         $this->urlPhoto = $urlPhoto;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getOrganizer()
-    {
-        return $this->organizer;
-    }
-
-    /**
-     * @param mixed $organizer
-     */
-    public function setOrganizer($organizer): void
-    {
-        $this->organizer = $organizer;
-    }
 
     /**
      * @return mixed
@@ -285,6 +266,24 @@ class Event
      * @ORM\JoinColumn(nullable=false)
      */
     private $campus;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Participant::class, inversedBy="events")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $organizer;
+
+    public function getOrganizer(): ?Participant
+    {
+        return $this->organizer;
+    }
+
+    public function setOrganizer(?Participant $organizer): self
+    {
+        $this->organizer = $organizer;
+
+        return $this;
+    }
 
 
 }
