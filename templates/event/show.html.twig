@@ -41,10 +41,21 @@
                 <td>{{ event.city.nameCity }}</td>
             </tr>
 
-            {# TODO: afficher le lieu: "location" #}
             <tr>
                 <th>Lieu</th>
-                <td>xxx</td>
+                <td>{{ event.location.nameLocation }}</td>
+            </tr>
+            <tr>
+                <th>Rue</th>
+                <td>{{ event.location.address }}</td>
+            </tr>
+            <tr>
+                <th>Latitude</th>
+                <td>{{ event.location.latitude }}</td>
+            </tr>
+            <tr>
+                <th>Longitude</th>
+                <td>{{ event.location.longitude }}</td>
             </tr>
 
         </tbody>

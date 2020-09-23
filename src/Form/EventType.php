@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Campus;
 use App\Entity\City;
 use App\Entity\Event;
+use App\Entity\Location;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -40,6 +41,10 @@ class EventType extends AbstractType
             ->add('duration', IntegerType::class, [
                 'label' => 'Durée'
             ])
+            /*->add('location', EntityType::class, [
+                'class' => Location::class,
+                'choice_label' => 'name_location'
+            ])*/
             ->add('maxRegistrations', IntegerType::class, [
                 'label' => 'Nombre de places'
             ])
@@ -59,7 +64,11 @@ class EventType extends AbstractType
             ->add('city', EntityType::class, [
             'class' => City::class,
             'choice_label' => 'name_city',
-    ]);
+            ])
+            ->add('location', EntityType::class, [
+                'class' => Location::class,
+                'choice_label' => 'name_location'
+            ]);
 
 
         /* todo: ajouter les reste des attributs: Lieu, Rue, Code postal, Latitude, Longitude  */

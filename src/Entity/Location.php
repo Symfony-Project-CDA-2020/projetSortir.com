@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\LieuxRepository;
+use App\Repository\LocationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=LieuxRepository::class)
+ * @ORM\Entity(repositoryClass=LocationRepository::class)
  */
 class Location
 {
@@ -16,11 +18,6 @@ class Location
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @ORM\Column (type="integer")
-     */
-    private $num_location;
 
     /**
      * @ORM\Column (type="string", length=30)
@@ -139,23 +136,43 @@ class Location
     }
 
     /**
-     * @return mixed
+     * @ORM\OneToMany(targetEntity=Event::class, mappedBy="location")
      */
-    public function getCityNumCity()
+    private $events;
+
+    public function __construct()
     {
-        return $this->city_num_city;
+        $this->events = new ArrayCollection();
     }
 
     /**
-     * @param mixed $city_num_city
+     * @return Collection|Event[]
      */
-    public function setCityNumCity($city_num_city): void
+    public function getEvents(): Collection
     {
-        $this->city_num_city = $city_num_city;
+        return $this->events;
     }
 
-    /**
-     * @ORM\Column (type="integer")
-     */
-    private $city_num_city;
+    public function addEvent(Event $event): self
+    {
+        if (!$this->events->contains($event)) {
+            $this->events[] = $event;
+            $event->setLocation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvent(Event $event): self
+    {
+        if ($this->events->contains($event)) {
+            $this->events->removeElement($event);
+            // set the owning side to null (unless already changed)
+            if ($event->getLocation() === $this) {
+                $event->setLocation(null);
+            }
+        }
+
+        return $this;
+    }
 }

@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Event;
+use App\Entity\Location;
 use App\Form\EventType;
 use App\Repository\CampusRepository;
 use App\Repository\CityRepository;
 use App\Repository\EventRepository;
+use App\Repository\LocationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
