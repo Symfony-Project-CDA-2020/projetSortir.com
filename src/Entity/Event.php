@@ -230,22 +230,6 @@ class Event
     /**
      * @return mixed
      */
-    public function getLocationNumLocation()
-    {
-        return $this->location_num_location;
-    }
-
-    /**
-     * @param mixed $location_num_location
-     */
-    public function setLocationNumLocation($location_num_location): void
-    {
-        $this->location_num_location = $location_num_location;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getStateNumState()
     {
         return $this->state_num_state;

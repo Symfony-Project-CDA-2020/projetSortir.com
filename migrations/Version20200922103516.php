@@ -20,7 +20,7 @@ final class Version20200922103516 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE event ADD city_id INT NOT NULL');
+       /* $this->addSql('ALTER TABLE event ADD city_id INT NOT NULL');*/
         $this->addSql('UPDATE event SET city_id = 1');
         $this->addSql('ALTER TABLE event ADD CONSTRAINT FK_3BAE0AA78BAC62AF FOREIGN KEY (city_id) REFERENCES city (id)');
         $this->addSql('CREATE INDEX IDX_3BAE0AA78BAC62AF ON event (city_id)');
