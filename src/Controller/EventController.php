@@ -23,6 +23,7 @@ class EventController extends AbstractController
      */
     public function index(EventRepository $eventRepository, CampusRepository $campusRepository, Request $request): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         return $this->render('event/index.html.twig', [
             'events' =>  $eventRepository->searchByFilter($request->get('filter')),
             'campus' => $campusRepository->findAll(),
