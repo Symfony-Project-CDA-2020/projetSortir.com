@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ParticipantRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -65,6 +67,16 @@ class Participant implements UserInterface, \Serializable
      * @ORM\Column(type="integer")
      */
     private $campus_num_campus;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Event::class, mappedBy="organizer")
+     */
+    private $events;
+
+    public function __construct()
+    {
+        $this->events = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -222,6 +234,37 @@ class Participant implements UserInterface, \Serializable
             $this->active,
             $this->campus_num_campus
             ) = unserialize($string, ['allowed_classes' => false]);
+    }
+
+    /**
+     * @return Collection|Event[]
+     */
+    public function getEvents(): Collection
+    {
+        return $this->events;
+    }
+
+    public function addEvent(Event $event): self
+    {
+        if (!$this->events->contains($event)) {
+            $this->events[] = $event;
+            $event->setOrganizer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvent(Event $event): self
+    {
+        if ($this->events->contains($event)) {
+            $this->events->removeElement($event);
+            // set the owning side to null (unless already changed)
+            if ($event->getOrganizer() === $this) {
+                $event->setOrganizer(null);
+            }
+        }
+
+        return $this;
     }
 
 
