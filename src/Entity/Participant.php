@@ -191,7 +191,7 @@ class Participant implements UserInterface, \Serializable
     }
     public function getRoles()
     {
-        if ($this->getAdmin()!=0){
+        if ($this->getAdmin()==1){
             return[
                 'ROLE_ADMIN'
             ];

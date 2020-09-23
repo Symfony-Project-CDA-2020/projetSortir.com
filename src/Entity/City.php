@@ -101,17 +101,56 @@ class City
             $this->locations[] = $location;
             $location->setCity($this);
         }
-
-        return $this;
     }
-
-    public function removeLocation(Location $location): self
+  
+  public function removeLocation(Location $location): self
     {
         if ($this->locations->contains($location)) {
             $this->locations->removeElement($location);
             // set the owning side to null (unless already changed)
             if ($location->getCity() === $this) {
                 $location->setCity(null);
+            }
+        }
+    }
+  
+    /**
+     * @ORM\OneToMany(targetEntity=Event::class, mappedBy="city")
+     */
+    private $events;
+
+    public function __construct()
+    {
+        $this->events = new ArrayCollection();
+    }
+
+    /**
+     * @return Collection|Event[]
+     */
+    public function getEvents(): Collection
+    {
+        return $this->events;
+    }
+
+    public function ad
+      
+    ent(Event $event): self
+    {
+        if (!$this->events->contains($event)) {
+            $this->events[] = $event;
+            $event->setCity($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvent(Event $event): self
+    {
+        if ($this->events->contains($event)) {
+            $this->events->removeElement($event);
+            // set the owning side to null (unless already changed)
+            if ($event->getCity() === $this) {
+                $event->setCity(null);
             }
         }
 

@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Event;
-use App\Entity\Participant;
+use App\Entity\Location;
 use App\Form\EventType;
 use App\Repository\CampusRepository;
+use App\Repository\CityRepository;
 use App\Repository\EventRepository;
+use App\Repository\LocationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,13 +25,10 @@ class EventController extends AbstractController
      */
     public function index(EventRepository $eventRepository, CampusRepository $campusRepository, Request $request): Response
     {
-        $selectCampus = $request->get('campus');
-        $eventsByCampus = $eventRepository->findByCampus($selectCampus);
-
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         return $this->render('event/index.html.twig', [
-            'events' => $eventRepository->findAll(),
+            'events' =>  $eventRepository->searchByFilter($request->get('filter')),
             'campus' => $campusRepository->findAll(),
-            'eventsByCampus' => $eventsByCampus
         ]);
     }
 
@@ -58,19 +57,20 @@ class EventController extends AbstractController
     /**
      * @Route("/{id}", name="event_show", methods={"GET"})
      */
-    public function show(Event $event): Response
+    public function show(Event $event,  CityRepository $cityRepository): Response
     {
 
 
         return $this->render('event/show.html.twig', [
             'event' => $event,
+            'city' => $cityRepository->findAll(),
         ]);
     }
 
     /**
      * @Route("/{id}/edit", name="event_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Event $event): Response
+    public function edit(Request $request, Event $event, CampusRepository $campusRepository, CityRepository $cityRepository): Response
     {
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
@@ -84,6 +84,8 @@ class EventController extends AbstractController
         return $this->render('event/edit.html.twig', [
             'event' => $event,
             'form' => $form->createView(),
+            'campus' => $campusRepository->findAll(),
+            'city' => $cityRepository->findAll()
         ]);
     }
 

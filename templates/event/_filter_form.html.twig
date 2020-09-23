@@ -1,7 +1,7 @@
 {# todo: gerer le formulaire / tous les filtres #}
 <form action="" method="get" class="filters row">
     <div class="col-md-5">
-        <select class="custom-select select-campus" name="campus">
+        <select class="custom-select select-campus" name="filter[campus]">
             <option selected>Sélectionnez un campus</option>
             {% for cam in campus %}
                 <option value={{ cam.id }}>{{ cam.nameCampus }}</option>

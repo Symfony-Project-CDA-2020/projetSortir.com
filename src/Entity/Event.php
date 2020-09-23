@@ -61,11 +61,6 @@ class Event
     /**
      * @ORM\Column(type="integer")
      */
-    private $location_num_location;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
     private $state_num_state;
 
     /**
@@ -216,22 +211,6 @@ class Event
     /**
      * @return mixed
      */
-    public function getLocationNumLocation()
-    {
-        return $this->location_num_location;
-    }
-
-    /**
-     * @param mixed $location_num_location
-     */
-    public function setLocationNumLocation($location_num_location): void
-    {
-        $this->location_num_location = $location_num_location;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getStateNumState()
     {
         return $this->state_num_state;
@@ -281,7 +260,40 @@ class Event
     public function setOrganizer(?Participant $organizer): self
     {
         $this->organizer = $organizer;
+    }
+  
+     /**
+     * @ORM\ManyToOne(targetEntity=City::class, inversedBy="events")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $city;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Location::class, inversedBy="events")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $location;
+
+    public function getCity(): ?City
+    {
+        return $this->city;
+    }
+
+    public function setCity(?City $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getLocation(): ?Location
+    {
+        return $this->location;
+    }
+
+    public function setLocation(?Location $location): self
+    {
+        $this->location = $location;
         return $this;
     }
 
