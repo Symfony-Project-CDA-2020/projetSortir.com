@@ -6,6 +6,7 @@ use App\Entity\Campus;
 use App\Entity\City;
 use App\Entity\Event;
 use App\Entity\Location;
+use App\Entity\Participant;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -41,18 +42,15 @@ class EventType extends AbstractType
             ->add('duration', IntegerType::class, [
                 'label' => 'Durée'
             ])
-            /*->add('location', EntityType::class, [
-                'class' => Location::class,
-                'choice_label' => 'name_location'
-            ])*/
             ->add('maxRegistrations', IntegerType::class, [
                 'label' => 'Nombre de places'
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description et infos'
             ])
-            ->add('organizer', IntegerType::class, [
-                'data' => 1,
+            ->add('organizer', EntityType::class, [
+                'class' => Participant::class,
+                'choice_label' => 'first_name',
             ])
             ->add('stateNumState', IntegerType::class, [
                 'data' => 1,

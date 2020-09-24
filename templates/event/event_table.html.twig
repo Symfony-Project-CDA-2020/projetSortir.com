@@ -25,7 +25,7 @@
             <td>{{ event.eventState }}</td>
             {# todo: Gestion des inscriptions, afficher "X" dans le tableau si inscrit #}
             <td>X</td>
-            <td>{{ event.organizer }}</td>
+            <td>{{ event.organizer.getFirstName }} {{ event.organizer.getLastName }}</td>
             <td>
                 {# todo: créer un conditionnel pour limiter les actions: si l'organisateur de la sortie est l'utilisateur connecté, il peut modifier ou annuler ses event #}
                 <a href="{{ path('event_show', {'id': event.id}) }}">show</a>
