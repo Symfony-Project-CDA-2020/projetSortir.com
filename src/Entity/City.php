@@ -132,9 +132,7 @@ class City
         return $this->events;
     }
 
-    public function ad
-      
-    ent(Event $event): self
+    public function addEvent(Event $event): self
     {
         if (!$this->events->contains($event)) {
             $this->events[] = $event;
