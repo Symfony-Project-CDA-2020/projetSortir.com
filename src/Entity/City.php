@@ -79,7 +79,7 @@ class City
 
 
     /**
-     * @ORM\OneToMany(targetEntity=Event::class, mappedBy="city")
+     * @ORM\OneToMany(targetEntity=Location::class, mappedBy="city")
      */
     private $locations;
 
