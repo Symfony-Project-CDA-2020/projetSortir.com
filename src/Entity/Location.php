@@ -40,6 +40,12 @@ class Location
     private $longitude;
 
     /**
+     * @ORM\ManyToOne(targetEntity=City::class, inversedBy="locations")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $city;
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -53,22 +59,6 @@ class Location
     public function setId($id): void
     {
         $this->id = $id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getNumLocation()
-    {
-        return $this->no_location;
-    }
-
-    /**
-     * @param mixed $no_location
-     */
-    public function setNumLocation($no_location): void
-    {
-        $this->no_location = $no_location;
     }
 
     /**
@@ -133,6 +123,18 @@ class Location
     public function setLongitude($longitude): void
     {
         $this->longitude = $longitude;
+    }
+
+    public function getCity(): ?City
+    {
+        return $this->city;
+    }
+
+    public function setCity(?City $city): self
+    {
+        $this->city = $city;
+
+        return $this;
     }
 
     /**
