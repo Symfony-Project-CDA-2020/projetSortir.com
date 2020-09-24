@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\EventRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

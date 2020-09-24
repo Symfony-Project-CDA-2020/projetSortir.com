@@ -77,8 +77,9 @@ class City
      */
     private $postal_code;
 
+
     /**
-     * @ORM\OneToMany(targetEntity=Location::class, mappedBy="city")
+     * @ORM\OneToMany(targetEntity=Event::class, mappedBy="city")
      */
     private $locations;
 
