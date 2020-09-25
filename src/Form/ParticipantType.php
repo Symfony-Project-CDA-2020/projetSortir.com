@@ -20,9 +20,13 @@ class ParticipantType extends AbstractType
             ->add('telephone')
             ->add('email')
             ->add('password')
+            ->add('campus')
+            ->add('campus', EntityType::class, [
+                'class' => Campus::class,
+                'choice_label' => 'name_campus',
+            ])
             /*->add('admin')
             ->add('active')*/
-            ->add('campus_num_campus')
         ;
     }
 
