@@ -29,9 +29,15 @@ class Campus
      */
     private $events;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Participant::class, mappedBy="campus")
+     */
+    private $participants;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
+        $this->participants = new ArrayCollection();
     }
 
     public function __toString()
@@ -101,6 +107,37 @@ class Campus
     public function setNameCampus($name_campus): void
     {
         $this->name_campus = $name_campus;
+    }
+
+    /**
+     * @return Collection|Participant[]
+     */
+    public function getParticipants(): Collection
+    {
+        return $this->participants;
+    }
+
+    public function addParticipant(Participant $participant): self
+    {
+        if (!$this->participants->contains($participant)) {
+            $this->participants[] = $participant;
+            $participant->setCampus($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipant(Participant $participant): self
+    {
+        if ($this->participants->contains($participant)) {
+            $this->participants->removeElement($participant);
+            // set the owning side to null (unless already changed)
+            if ($participant->getCampus() === $this) {
+                $participant->setCampus(null);
+            }
+        }
+
+        return $this;
     }
 
 }

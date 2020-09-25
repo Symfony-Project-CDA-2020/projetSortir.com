@@ -64,22 +64,6 @@ class Location
     /**
      * @return mixed
      */
-    public function getNumLocation()
-    {
-        return $this->no_location;
-    }
-
-    /**
-     * @param mixed $no_location
-     */
-    public function setNumLocation($no_location): void
-    {
-        $this->no_location = $no_location;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getNameLocation()
     {
         return $this->name_location;

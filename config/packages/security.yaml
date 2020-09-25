@@ -18,6 +18,7 @@ security:
                 login_path: login
                 check_path: login
                 provider: my_provider
+                default_target_path: /event
 
 
 
@@ -35,6 +36,6 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-    #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY}
+    - { path: ^/participant/new, roles: IS_AUTHENTICATED_ANONYMOUSLY}
     #- { path: ^/participant/new, roles: IS_AUTHENTICATED_ANONYMOUSLY}
-    #- { path: ^/, roles: ROLE_USER }
+    - { path: ^/event, roles: IS_AUTHENTICATED_FULLY }

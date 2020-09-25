@@ -260,6 +260,7 @@ class Event
     public function setOrganizer(?Participant $organizer): self
     {
         $this->organizer = $organizer;
+        return $this;
     }
   
      /**

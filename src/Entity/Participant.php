@@ -7,7 +7,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
 /**
@@ -64,14 +63,15 @@ class Participant implements UserInterface, \Serializable
     private $active;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $campus_num_campus;
-
-    /**
      * @ORM\OneToMany(targetEntity=Event::class, mappedBy="organizer")
      */
     private $events;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="participants")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $campus;
 
     public function __construct()
     {
@@ -178,17 +178,6 @@ class Participant implements UserInterface, \Serializable
         return $this;
     }
 
-    public function getCampusNumCampus(): ?int
-    {
-        return $this->campus_num_campus;
-    }
-
-    public function setCampusNumCampus(int $campus_num_campus): self
-    {
-        $this->campus_num_campus = $campus_num_campus;
-
-        return $this;
-    }
     public function getRoles()
     {
         if ($this->getAdmin()==1){
@@ -216,7 +205,7 @@ class Participant implements UserInterface, \Serializable
             $this->password,
             $this->admin,
             $this->active,
-            $this->campus_num_campus
+            $this->campus
 
         ]);
     }
@@ -232,7 +221,7 @@ class Participant implements UserInterface, \Serializable
             $this->password,
             $this->admin,
             $this->active,
-            $this->campus_num_campus
+            $this->campus
             ) = unserialize($string, ['allowed_classes' => false]);
     }
 
@@ -263,6 +252,18 @@ class Participant implements UserInterface, \Serializable
                 $event->setOrganizer(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCampus(): ?Campus
+    {
+        return $this->campus;
+    }
+
+    public function setCampus(?Campus $campus): self
+    {
+        $this->campus = $campus;
 
         return $this;
     }

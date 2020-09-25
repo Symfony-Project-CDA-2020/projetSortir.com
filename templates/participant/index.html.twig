@@ -17,7 +17,7 @@
                 <th>Password</th>
                 <th>Admin</th>
                 <th>Active</th>
-                <th>Campus_num_campus</th>
+                <th>Campus</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -33,7 +33,7 @@
                 <td>{{ participant.password }}</td>
                 <td>{{ participant.admin ? 'Yes' : 'No' }}</td>
                 <td>{{ participant.active ? 'Yes' : 'No' }}</td>
-                <td>{{ participant.campusNumCampus }}</td>
+                <td>{{ participant.campus.getNameCampus }}</td>
                 <td>
                     <a href="{{ path('participant_show', {'id': participant.id}) }}">show</a>
                     <a href="{{ path('participant_edit', {'id': participant.id}) }}">edit</a>

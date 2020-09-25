@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Participant;
 use App\Form\ParticipantType;
 use App\Repository\ParticipantRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,6 +16,14 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 class ParticipantController extends AbstractController
 {
+    /**
+     * @Route("/mon profil", name="profile_index", methods={"GET"})
+     */
+    public function profile(): Response
+    {
+        return $this->render('participant/profile.html.twig');
+    }
+
     /**
      * @Route("/", name="participant_index", methods={"GET"})
      */
@@ -47,6 +54,12 @@ class ParticipantController extends AbstractController
 
             $password = $encoder->encodePassword($participant, $participant->getPassword());
             $participant->setPassword($password);
+
+            //ici on met de base ces valeurs
+            $participant->setAdmin(0);
+            $participant->setActive(1);
+
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($participant);
             $entityManager->flush();

@@ -4,7 +4,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-        {# todo: écrire les paths corrects pour chaque lien, et gérer le lien actif #}
+        {# TODO pour l'instant j'ai mis ces conditions pour pouvoir continuer de travailler, mais il faudra le gérer autrement#}
         <ul class="navbar-nav">
             {% if is_granted('ROLE_ADMIN') %}
             <li class="nav-item">
@@ -14,13 +14,28 @@
                 <a class="nav-link" href="{{ path('campus_index') }}">Campus</a>
             </li>
             {% endif %}
+            {% if is_granted('ROLE_USER') %}
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('event_index') }}">Sorties</a>
             </li>
-            {# TODO: afficher le profil de l'utilisateur
+            {% endif %}
+            {% if is_granted('ROLE_ADMIN') %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('event_index') }}">Sorties</a>
+                </li>
+            {% endif %}
+            {% if is_granted('ROLE_USER') %}
            <li class="nav-item">
-                <a class="nav-link" href="{{ path('participant_index') }}">Mon profil</a>
-            </li>#}
+                <a class="nav-link" href="{{ path('profile_index') }}">Mon profil</a>
+            </li>
+            {% endif %}
+
+            {% if is_granted('ROLE_ADMIN') %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('profile_index') }}">Mon profil</a>
+                </li>
+            {% endif %}
+
             {% if is_granted('ROLE_USER') %}
                 <li class="nav-item">
                 <a class="nav-link" href="{{ path('logout') }}">Se déconnecter</a>

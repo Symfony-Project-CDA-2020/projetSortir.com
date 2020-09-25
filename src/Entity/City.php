@@ -77,6 +77,7 @@ class City
      */
     private $postal_code;
 
+
     /**
      * @ORM\OneToMany(targetEntity=Location::class, mappedBy="city")
      */
@@ -101,6 +102,7 @@ class City
             $this->locations[] = $location;
             $location->setCity($this);
         }
+        return $this;
     }
   
   public function removeLocation(Location $location): self
@@ -112,17 +114,13 @@ class City
                 $location->setCity(null);
             }
         }
+        return $this;
     }
   
     /**
      * @ORM\OneToMany(targetEntity=Event::class, mappedBy="city")
      */
     private $events;
-
-    public function __construct()
-    {
-        $this->events = new ArrayCollection();
-    }
 
     /**
      * @return Collection|Event[]
