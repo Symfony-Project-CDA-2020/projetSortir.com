@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Campus;
 use App\Entity\Participant;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,8 +20,8 @@ class ParticipantType extends AbstractType
             ->add('telephone')
             ->add('email')
             ->add('password')
-            ->add('admin')
-            ->add('active')
+            /*->add('admin')
+            ->add('active')*/
             ->add('campus_num_campus')
         ;
     }
