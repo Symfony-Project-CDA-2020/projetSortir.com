@@ -17,10 +17,12 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('event_index') }}">Sorties</a>
             </li>
-            {# TODO: afficher le profil de l'utilisateur
+
            <li class="nav-item">
-                <a class="nav-link" href="{{ path('participant_index') }}">Mon profil</a>
-            </li>#}
+                <a class="nav-link" href="{{ path('profile_index') }}">Mon profil</a>
+            </li>
+
+            {# TODO pour l'instant j'ai mis cette condition pour pouvoir continuer de travailler, mais il faudra le gérer autrement#}
             {% if is_granted('ROLE_USER') %}
                 <li class="nav-item">
                 <a class="nav-link" href="{{ path('logout') }}">Se déconnecter</a>
