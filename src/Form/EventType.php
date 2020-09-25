@@ -40,7 +40,7 @@ class EventType extends AbstractType
                 'label' => 'Date limite d\'inscription'
             ])
             ->add('duration', IntegerType::class, [
-                'label' => 'Durée'
+                'label' => 'Durée en heures'
             ])
             ->add('maxRegistrations', IntegerType::class, [
                 'label' => 'Nombre de places'
