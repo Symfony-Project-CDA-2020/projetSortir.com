@@ -64,9 +64,11 @@
 
     <a href="{{ path('event_index') }}">Retour à la liste</a>
 
+    {% if app.user.firstname  == event.organizer.firstName %}
     <button class="btn btn-primary button-style">
         <a href="{{ path('event_edit', {'id': event.id}) }}">modifier</a>
     </button>
 
     {{ include('event/_delete_form.html.twig') }}
+    {% endif %}
 {% endblock %}
