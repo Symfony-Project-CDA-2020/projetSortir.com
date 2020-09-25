@@ -27,9 +27,10 @@
             <td>X</td>
             <td>{{ event.organizer.getFirstName }} {{ event.organizer.getLastName }}</td>
             <td>
-                {# todo: créer un conditionnel pour limiter les actions: si l'organisateur de la sortie est l'utilisateur connecté, il peut modifier ou annuler ses event #}
-                <a href="{{ path('event_show', {'id': event.id}) }}">show</a>
-                <a href="{{ path('event_edit', {'id': event.id}) }}">edit</a>
+                <a href="{{ path('event_show', {'id': event.id}) }}">Afficher</a>
+                {% if app.user.firstname  == event.organizer.firstName %}
+                <a href="{{ path('event_edit', {'id': event.id}) }}">Modifier</a>
+                {% endif %}
             </td>
         </tr>
         {% endfor %}
